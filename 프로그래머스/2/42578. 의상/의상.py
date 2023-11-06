@@ -8,8 +8,7 @@ def solution(clothes):
         else:
             dict[cloth[1]] = 1
     
-    for key ,value in dict.items():
-        print(value)
+    for value in dict.values():
         answer *= value+1
     
     return answer-1
