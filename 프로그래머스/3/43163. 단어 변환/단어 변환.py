@@ -13,10 +13,10 @@ def available(w1, w2):
 def solution(begin, target, words):
     if target not in words:
         return 0
-    answer = 0
     
     # 인접 리스트 만들기. 변환 가능한 단어쌍 저장
-    # 마지막 단어는 begin
+    # 단어 배열 마지막에 begin도 추가
+    # 단어는 인덱스로 접근
     
     words.append(begin)
     graph = [[] for _ in range(len(words)+1)]
@@ -24,15 +24,15 @@ def solution(begin, target, words):
         for j in range(len(words)):
             if available(words[i], words[j]):
                 graph[i].append(j)
+    print(graph)
                 
     queue = deque([(len(words)-1, 0)]) # begin 단어, 횟수 카운트
-    visited = [False] * len(words)
+
     
     while deque:
         word, count = queue.popleft()
         if words[word] == target:
             return count
-        visited[word] = True
         for i in graph[word]:
             queue.append((i, count+1))
             
