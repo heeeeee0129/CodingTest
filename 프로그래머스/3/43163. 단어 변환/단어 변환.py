@@ -28,7 +28,6 @@ def solution(begin, target, words):
                 
     queue = deque([(len(words)-1, 0)]) # begin 단어, 횟수 카운트
 
-    
     while deque:
         word, count = queue.popleft()
         if words[word] == target:
