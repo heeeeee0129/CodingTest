@@ -8,14 +8,12 @@ def solution(people, limit):
     # -> 두 개의 인덱스를 가리키는 변수 사용
     # 가장 무거운 애 먼저 태워보고, 가벼운 애 추가 가능하면 걔 넣고 태우기. 안 되면 무거운 애 한 명만
     
-    
-    while heavy <= light :
+    while heavy <= light:
         if people[heavy]+people[light] <= limit:
             heavy +=1
             light -=1
-            answer+=1
         else:
             heavy += 1
-            answer+= 1
+        answer+= 1
     
     return answer
