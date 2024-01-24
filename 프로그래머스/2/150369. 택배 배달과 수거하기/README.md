@@ -309,5 +309,76 @@
 <p>30(=7+7+5+5+3+3)의 거리를 이동하면서 모든 배달 및 수거를 마쳤습니다. 같은 거리로 모든 배달 및 수거를 마치는 다른 방법이 있지만, 이보다 짧은 거리로 모든 배달 및 수거를 마치는 방법은 없습니다. <br>
 따라서, 30을 return 하면 됩니다.</p>
 
+## 내 풀이 방법
+```
+while(index){
+        if(index에 0보다 큰 값이 있으면){
+                해당 index를 move에 더함
+                for(index; index--;;){
+                        cap 용량이 넘치기 전까지 처리
+                        cap 용량 넘친 경우, index를 여기로 업데이트하고 break
+                }
+        }
+}
+```
+deliveries, pickup 배열을 뒤에서 탐색하며 0보다 큰 게 하나라도 있으면 해당 index를 들르기 <br/>
+그 index로부터 남은 cap 용량만큼 빼면서 배열을 뒤에서 탐색<br/>
+용량을 넘칠 경우 그 index로 업데이트 후 break <br/>
+```python
+    def solution(cap, n, deliveries, pickups):
+    move = 0
+    idx = n-1
+    while(idx>=0):
+        if deliveries[idx] > 0 or pickups[idx] > 0:
+            move+=idx+1
+            count_del = 0
+            count_pick = 0
+            for i in range(idx, -1, -1):
+                delivery = min(cap-count_del, deliveries[i])
+                deliveries[i] -= delivery
+                count_del += delivery
+                pick = min(cap-count_pick, pickups[i])
+                pickups[i] -= pick
+                count_pick += pick
+                if count_del > cap or count_pick > cap:
+                    idx = i
+                    break
+        else:
+            idx -= 1
+    return move*2
+```
+
+
+
+#### 틀린 이유: 시간 초과
+#### 시간초과의 원인: deliveries, pickups 배열에 작은 개수의 박스들이 놓여 있는 경우, 루프를 많이 돌아서 시간 초과가 나는 것으로 생각
+#### 해결방법: Java로 언어를 바꿔서 제출해보았음에도 시간초과가 나길래, 언어 문제가 아닌 내 로직에 문제가 있다고 생각하고 그냥 해답 검색합.
+
+## 해답
+옮길 수 있는 양을 delivery, pickup 각각 카운트하는 변수를 선언<br/>
+각 배열을 뒤에서 탐색하면서 배열의 값을 각 카운트 변수에 ADD<br/>
+카운트한 변수가 0보다 크다면 그 인덱스에는 들러야 한다는 뜻<br/>
+그 인덱스에 들러서 카운트 변수에 각각 다시 cap만큼 SUB<br/>
+
+
+```python
+def solution(cap, n, deliveries, pickups):
+    move = 0
+    del_pool = 0
+    pick_pool = 0
+    for i in range(n-1, -1, -1):
+        del_pool += deliveries[i]
+        pick_pool += pickups[i]
+        while del_pool > 0 or pick_pool > 0:
+            del_pool -= cap
+            pick_pool -= cap
+            move += i+1
+    return move*2
+```
+
+
+
+
+
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://school.programmers.co.kr/learn/challenges
