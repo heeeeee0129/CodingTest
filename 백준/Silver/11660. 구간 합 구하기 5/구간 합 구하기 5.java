@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
+		StringBuilder sb = new StringBuilder();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(in.readLine());
 		int n = Integer.parseInt(st.nextToken());
@@ -32,9 +33,10 @@ public class Main {
 			int end_x = Integer.parseInt(st.nextToken());
 			int end_y = Integer.parseInt(st.nextToken());
 			
-			System.out.println(sum_matrix[end_x][end_y]-sum_matrix[start_x-1][end_y]-sum_matrix[end_x][start_y-1]+sum_matrix[start_x-1][start_y-1]);
+			sb.append(sum_matrix[end_x][end_y]-sum_matrix[start_x-1][end_y]-sum_matrix[end_x][start_y-1]+sum_matrix[start_x-1][start_y-1]);
+			sb.append("\n");
 		}
 		
-		
+		System.out.println(sb);
 	}
 }
