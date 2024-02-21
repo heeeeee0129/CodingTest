@@ -1,10 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -13,7 +9,6 @@ public class Main {
 	static int n;
 	static int m;
 	static int[][] arr;
-	static HashSet<Pair> set;
 	static int[][] chicken = new int[13][2];
 	static int index;
 	static int[] selected;
@@ -55,9 +50,6 @@ public class Main {
 		int count_home = home;
 		int[][] visited = new int[n][n];
 		while(count_home>0 ) {
-//			if(chickenQ.isEmpty()) {
-//				return -1;
-//			}
 			Node chicken = chickenQ.poll();
 			for(int d = 0; d<4; d++	) {
 				int curx = chicken.p.x + dxdy[d][0];
@@ -69,7 +61,6 @@ public class Main {
 						count += (chicken.sum);
 					}
 					chickenQ.add(new Node(new Pair(curx, cury), chicken.sum+1));
-					
 				}
 			}
 		}
@@ -86,9 +77,7 @@ public class Main {
 		            }
 		        }
 			int c = bfs();
-			if(c != -1) {
-				min_count = Math.min(min_count, c);
-			}
+			min_count = Math.min(min_count, c);
 			
 		}else {
 			for(int i = st; i<index; i++) {
@@ -110,7 +99,6 @@ class Node {
 		this.p = p;
 		this.sum = sum;
 	}
-
 	
 }
 
