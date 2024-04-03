@@ -20,12 +20,12 @@ dist[s] = 0
 
 while queue:
     cost, node = heapq.heappop(queue)
+    if node == goal:
+        print(cost)
+        break
     if dist[node] < cost:
         continue 
     for next_node, c in arr[node]:
         if dist[next_node] > cost+c:
             dist[next_node] = cost+c
             heapq.heappush(queue, [cost+c, next_node])
-
-
-print(dist[goal])
