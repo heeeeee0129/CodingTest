@@ -1,32 +1,27 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Solution {
-    public static int t;
-    public static int n;
-    public static int m;
-    public static void main(String[] args) throws Exception {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        t = Integer.parseInt(in.readLine());
-        StringTokenizer st;
 
-        for(int test_case = 1;test_case<=t ; test_case++){
-          st = new StringTokenizer(in.readLine());
-          n = Integer.parseInt(st.nextToken());
-          m = Integer.parseInt(st.nextToken());
-          if(test(m)) {
-            System.out.println("#"+test_case+ " ON");
-          }else{
-            System.out.println("#"+test_case+" OFF");
-          }
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int testcase = Integer.parseInt(br.readLine());
+		
+		for(int t = 1; t<=testcase ; t++) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int n = Integer.parseInt(st.nextToken());
+			int m = Integer.parseInt(st.nextToken());
+			int mask = (1<<n)-1;
+			if((m & mask) == mask) {
+				System.out.println("#"+t + " ON");
+			}else {
+				System.out.println("#"+t+" OFF");
+			}
+			
+		}
 
-        }
-    }
-    
-
-    public static boolean test(int number){
-      int mask = (1 << n) - 1;
-      return (number & mask) == mask;
-    }
+	}
 
 }
