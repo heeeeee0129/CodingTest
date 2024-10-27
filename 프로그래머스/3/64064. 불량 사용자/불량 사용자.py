@@ -1,6 +1,6 @@
 def dfs(i, visited, n, ban_list, visited_set):
     global cnt
-    if i >= n:
+    if i == n:
         if visited not in visited_set:
             visited_set.add(visited)
             cnt = cnt + 1
@@ -11,18 +11,14 @@ def dfs(i, visited, n, ban_list, visited_set):
 
 def solution(user_id, banned_id):
     global cnt
-    answer = 0
+    cnt = 0
     n = len(banned_id)
     ban_list = [[] for _ in range(n)]
     user_dict = {}
     visited_set = set()
-    cnt = 0
     
     for i, user in enumerate(user_id):
-        if len(user) in user_dict:
-            user_dict[len(user)].append(i)
-        else:
-            user_dict[len(user)] = [i]
+        user_dict.setdefault(len(user), []).append(i)
 
     for i, ban in enumerate(banned_id):
         for target_idx in user_dict[len(ban)]:
@@ -34,8 +30,6 @@ def solution(user_id, banned_id):
             if flag:
                 ban_list[i].append(target_idx)
                 
-    
     dfs(0, 0, n, ban_list, visited_set)
-            
     
     return cnt
